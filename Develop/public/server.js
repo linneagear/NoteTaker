@@ -22,15 +22,15 @@ let activeNote = {};
 // =============================================================
 
 // First GET the files
-// default is homepage
-app.get("*", function(req, res) {
-   res.sendFile(path.join(__dirname, "index.html"));
-  });
-
 // GET notes page
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "notes.html"));
   });
+
+// default is homepage
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+ });
 
 
 // API Routes
@@ -46,9 +46,7 @@ app.get("/api/notes/:id", function(req, res) {
   });
 
 
-// Receives a new note to save on the request body, 
-// add it to the `db.json` file, and then return the 
-// new note to the client.
+
 app.post("/api/notes", function(req, res) {
     const savedNotes = JSON.parse()
     const newNote = req.body;
