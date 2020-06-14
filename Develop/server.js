@@ -67,6 +67,8 @@ app.delete("/api/notes/:id", function(req, res) {
 
   let noteID = req.params.id;
 
+  // to delete, need to SPLICE it away from the other IDs by getting the index position
+  notesArray.splice((notesArray).indexOf(noteID), 1);
 
   console.log("Note deleted.");
   // write the file now that the note is deleted from the array
