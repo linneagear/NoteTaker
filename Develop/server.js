@@ -8,7 +8,6 @@ const fs = require("fs");
 // =============================================================
 const app = express();
 const PORT = 3000;
-const mainDir = path.join(__dirname, "/public");
 
 // Sets up the Express app to handle data parsing and static
 app.use(express.static('public'));
@@ -20,7 +19,7 @@ app.use(express.json());
 
 // Changes to notes page when Get Started button is clicked
 app.get("/notes", function(req, res) {
-  res.sendFile(path.join(mainDir, "notes.html"));
+  res.sendFile(path.join(__dirname, 'public', "notes.html"));
 });
 
 app.get("/api/notes", function(req, res) {
@@ -30,7 +29,7 @@ app.get("/api/notes", function(req, res) {
 
 // default is homepage, this needs to be last in the order
 app.get("*", function(req, res) {
-  res.sendFile(path.join(mainDir, "index.html"));
+  res.sendFile(path.join(__dirname, 'public', "index.html"));
 });
 
 
