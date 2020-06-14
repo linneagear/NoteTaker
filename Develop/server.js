@@ -44,8 +44,10 @@ app.post("/api/notes", function(req, res) {
     // body of the request = the new note
     let newNote = req.body;
 
-    // give the note an id
-    newNote.id= notesArray.length + 1
+    // give the note an id by doing a for loop
+    for (let i = 0; i < notesArray.length; i++) {
+      newNote.id = "" + [i]
+    }
   
     // push it to the empty object
     notesArray.push(newNote);
@@ -58,7 +60,20 @@ app.post("/api/notes", function(req, res) {
 
   });
 
+  // DELETE note by id
+app.delete("/api/notes/:id", function(req, res) {
+  // Parse the db.json to get an object
+  let notesArray = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
+  let noteID = req.params.id;
+
+
+  console.log("Note deleted.");
+  // write the file now that the note is deleted from the array
+  fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
+  res.json(notesArray);
+  
+});
 
 // Starts the server to begin listening
 // =============================================================
