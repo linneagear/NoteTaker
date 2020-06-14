@@ -26,7 +26,6 @@ app.get("/api/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
-
 // default is homepage, this needs to be last in the order
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, 'public', "index.html"));
