@@ -33,56 +33,31 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(mainDir, "index.html"));
 });
 
-// displays all notes
-// app.get("/api/notes", function(req, res) {
-
- 
-// })
-
 
 // Should receive a new note to save on the request body, 
 // add it to the `db.json` file, and then return the new note to the client.
-// app.post("/api/notes", function(req, res) {
- 
-//     let notesArray = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+app.post("/api/notes", function(req, res) {
 
-//     let newNote = req.body;
-//     console.log(newNote);
-//     // set new notes ID
-//     let uniqueID = uniqueID;
+    // Parse the db.json to get an object
+    let notesArray = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
-//     // give the new note an ID
-//     newNote.id = uniqueID;
-//     console.log(uniqueID);
+    // body of the request = the new note
+    let newNote = req.body;
 
-//     // push it to the empty object
-//     notesArray.push(newNote);
+    // give the note an id
+    newNote.id= notesArray.length + 1
+  
+    // push it to the empty object
+    notesArray.push(newNote);
 
-//     fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
-//     console.log("Note saved to db.json. Content: ", newNote);
+    // write the new file to db.json, and stringify it back to a string to go to the server
+    fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
+    console.log("Note saved.");
 
-//     res.json(notesArray);
+    res.json(notesArray);
 
-//   });
+  });
 
-// app.delete("/api/notes/:id", function(req, res) {
-//   let notesArray = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-//   let noteID = req.params.id;
-//   let newID = 0;
-//   console.log(`Deleting note with ID ${noteID}`);
-//   notresArray = notesArray.filter(currentNote => {
-//     return currentNote.id != noteID;
-//   })
-
-//     for (currentNote of notesArray) {
-//       currentNote.id = newID.toString();
-//       newID++;
-//     }
-
-//     fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
-//     res.json(savedNotes);
-
-//   });
 
 
 // Starts the server to begin listening
