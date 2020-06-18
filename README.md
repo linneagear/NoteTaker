@@ -16,17 +16,4 @@ SO THAT I can organize my thoughts and keep track of tasks I need to complete
 
 ![Example notes](Develop/public/assets/notes.PNG)
 
-[Deployed Link]
-
-## Deploying the App
-
-You will not be able to deploy your server side code on GitHub pages. This app should be deployed on Heroku. Carefully follow the [Heroku Guide](../04-Supplemental/HerokuGuide.md) for getting your app deployed on Heroku.
-
-
-## Submission on BCS
-
-You are required to submit the following:
-
-* The URL of the deployed application. This should be the link to the url provided by Heroku. Be sure not to submit a link to the Heroku dashboard.
-
-* The URL of the GitHub repository
+[Deployed Link]()
