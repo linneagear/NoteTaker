@@ -14,6 +14,6 @@ SO THAT I can organize my thoughts and keep track of tasks I need to complete
 
 ## Application
 
-![Example notes](Develop/public/assets/notes.PNG)
+![Example notes](public/assets/notes.PNG)
 
 [Deployed Link](https://morning-dusk-54935.herokuapp.com/)
