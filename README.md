@@ -1,6 +1,6 @@
 ## Description
 
-This application creates and saves notes, allows you to view previously created notes, and deletes notes. This application will use an express backend and save and retrieve note data from a JSON file.
+This application creates and saves notes, allows you to view previously created notes, and deleted notes. This application will use an express backend and save and retrieve note data from a JSON file.
 
 ## User Story
 
