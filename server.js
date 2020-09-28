@@ -3,6 +3,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const store = require("./db/store");
 
 // Sets up the Express App
 // =============================================================
@@ -22,13 +23,16 @@ app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, 'public', "notes.html"));
 });
 
-app.get("/api/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "/db/db.json"));
-});
-
 // default is homepage, this needs to be last in the order
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, 'public', "index.html"));
+});
+
+app.get("/api/notes", function(req, res) {
+  store
+    .getNotes()
+    .then((notes) => res.json(notes))
+    .catch((err) => res.status(500).json(err));
 });
 
 
@@ -58,26 +62,17 @@ app.post("/api/notes", function(req, res) {
 
   });
 
-  // DELETE note by id
+// DELETE note by id
 app.delete("/api/notes/:id", function(req, res) {
-  // Parse the db.json to get an object
-  let notesArray = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-
-  let noteID = req.params.id;
-
-  // to delete, need to SPLICE it away from the other IDs by getting the index position
-  notesArray.splice((notesArray).indexOf(noteID), 1);
-
-  console.log("Note deleted.");
-  // write the file now that the note is deleted from the array
-  fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
-  res.json(notesArray);
-  
+  store
+    .removeNote(req.params.id)
+    .then(() => res.json({ ok: true }))
+    .catch((err) => res.status(500).json(err));
 });
 
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
     console.log(`App listening on PORT ${PORT}`);
-  });
+});
   
